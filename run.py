@@ -20,8 +20,8 @@ if __name__ == '__main__':
         agent1.observe(reward=r1, reward_o=r2, opponent_action=agent2.previous_action)
         agent2.observe(reward=r2, reward_o=r1, opponent_action=agent1.previous_action)
 
-    plt.plot(np.arange(len(agent1.pi_history)),agent1.pi_history, label="agent1's pi(0)")
-    plt.plot(np.arange(len(agent2.pi_history)),agent2.pi_history, label="agent2's pi(0)")
+    plt.plot(np.arange(len(agent1.pi_history)), agent1.pi_history, label="agent1's pi(0)")
+    plt.plot(np.arange(len(agent2.pi_history)), agent2.pi_history, label="agent2's pi(0)")
     plt.xlabel("episode")
     plt.ylabel("pi(0)")
     plt.legend()
