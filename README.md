@@ -35,4 +35,4 @@ python run.py
 After two-player zero-sum is finished, the program plots result.
 
 ## blog(japanese)
-https://www.tcom242242.net/entry/2019/06/28/%E3%80%90%E3%83%9E%E3%83%AB%E3%83%81%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92%E3%80%91Minimax_Q_Learning
+https://www.tcom242242.net/entry/2019/07/12/%e3%80%90%e3%83%9e%e3%83%ab%e3%83%81%e3%82%a8%e3%83%bc%e3%82%b8%e3%82%a7%e3%83%b3%e3%83%88%e5%bc%b7%e5%8c%96%e5%ad%a6%e7%bf%92%e3%80%91nash_q_learningnash_q_%e5%ad%a6%e7%bf%92/
