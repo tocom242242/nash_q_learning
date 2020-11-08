@@ -31,17 +31,42 @@ class GridEnv:
 
         self.nb_agents = nb_agents
         self.agents_pos = {}
-        # for agent in self.agents:
-        #     pos = self._init_pos(self.agents_pos.values(), FILED_TYPE["A"])
-        #     self.agents_pos[agent.id] = pos
-        self._set_pos(x=1, y=3, otype=F["A"], aid=0)
-        self._set_pos(x=3, y=3, otype=F["A"], aid=1)
+
+        for aid in range(self.nb_agents):
+            pos = self._get_random_pos(self.agents_pos.values(), F["A"])
+            self._set_pos(x=pos[1], y=pos[0], otype=F["A"], aid=aid)
+            self.agents_pos[aid] = pos
+
+        # self._set_pos(x=1, y=3, otype=F["A"], aid=0)
+        # self._set_pos(x=3, y=3, otype=F["A"], aid=1)
 
         self.ini_agent_pos = copy.deepcopy(self.agents_pos)
 
         self.is_goals = [False for _ in range(self.nb_agents)]
 
         self.inimap = copy.deepcopy(self.map)
+
+    def _get_random_pos(self, poss=[], otype=None):
+        """
+            被らないposデータの生成
+        """
+
+        x = np.random.randint(
+            self.range_obs, len(
+                self.map[0]) - self.range_obs)
+        y = np.random.randint(self.range_obs, len(self.map) - self.range_obs)
+
+        while ((x, y) in poss or self.map[y][x]
+               == F["W"] or self.map[y][x] == F["G"]):
+            x = np.random.randint(
+                self.range_obs, len(
+                    self.map[0]) - self.range_obs)
+            y = np.random.randint(
+                self.range_obs, len(
+                    self.map) - self.range_obs)
+
+        # self.map[y][x] = otype
+        return x, y
 
     def shape_map(self, range_obs, _gridmap):
         gridmap = _gridmap
@@ -172,7 +197,11 @@ class GridEnv:
     def reset(self):
         self.map = copy.deepcopy(self.inimap)
         self.agents_pos = {}
-        self.agents_pos = copy.deepcopy(self.ini_agent_pos)
+        for aid in range(self.nb_agents):
+            pos = self._get_random_pos(self.agents_pos.values(), F["A"])
+            self._set_pos(x=pos[1], y=pos[0], otype=F["A"], aid=aid)
+            self.agents_pos[aid] = pos
+        # self.agents_pos = copy.deepcopy(self.ini_agent_pos)
         self.is_goals = [False for _ in range(self.nb_agents)]
 
         observations = self.create_observations()

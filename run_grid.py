@@ -5,8 +5,8 @@ from policy import EpsGreedyQPolicy
 from grid_env import GridEnv
 
 if __name__ == '__main__':
-    nb_episode = 500
-    max_steps = 100
+    nb_episode = 1
+    max_steps = 10
     actions = np.arange(4)
 
     game = GridEnv(nb_agents=2)
