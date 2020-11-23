@@ -24,12 +24,12 @@ git clone https://github.com/tocom242242/nash_q_learning.git
 cd nash_q_learning
 ```
 
-#### 3. Run sample
+#### 3. Run sample matrix game 
 
 To run sample code
 
 ```
-python run.py
+python run_matrix_game.py
 ```
 
 After two-player zero-sum is finished, the program plots result.
