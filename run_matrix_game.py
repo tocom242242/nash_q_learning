@@ -1,22 +1,19 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from nash_q_learner import NashQLearner
-from policy import EpsGreedyQPolicy
 from matrix_game import MatrixGame
 
 if __name__ == '__main__':
     nb_episode = 1000
 
     agent1 = NashQLearner(
-        alpha=0.1,
-        policy=EpsGreedyQPolicy(),
         actions=np.arange(2))
     agent2 = NashQLearner(
-        alpha=0.1,
-        policy=EpsGreedyQPolicy(),
         actions=np.arange(2))
 
     game = MatrixGame()
+    pi1_history = []
+    pi2_history = []
     for episode in range(nb_episode):
         action1 = agent1.act()
         action2 = agent2.act()
@@ -32,12 +29,18 @@ if __name__ == '__main__':
             reward_o=r1,
             opponent_action=agent1.prev_action)
 
-    plt.plot(np.arange(len(agent1.pi_history)),
-             agent1.pi_history, label="agent1's pi(0)")
-    plt.plot(np.arange(len(agent2.pi_history)),
-             agent2.pi_history, label="agent2's pi(0)")
+        pi1 = agent1.get_pi()
+        pi2 = agent2.get_pi()
+        pi1_history.append(pi1[0])
+        pi2_history.append(pi2[0])
+
+    plt.plot(np.arange(len(pi1_history)),
+             pi1_history, label="agent1's pi(0)")
+    plt.plot(np.arange(len(pi2_history)),
+             pi2_history, label="agent2's pi(0)")
     plt.xlabel("episode")
     plt.ylabel("pi(0)")
+    plt.ylim(0, 1)
     plt.legend()
     plt.savefig("result.jpg")
     plt.show()
